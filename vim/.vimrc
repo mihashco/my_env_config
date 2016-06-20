@@ -6,10 +6,8 @@ set t_Co=256
 set t_ut=
 syntax on
 
-"change tab to 4 spaces
-set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=3
+set shiftwidth=3
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -17,7 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-scripts/lightline'
 Plugin 'vim-scripts/Command-T'
 Plugin 'vim-scripts/vim-javacomplete2'
-Plugin 'vim-scripts/argwrap.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/buftabline'
 Plugin 'vim-scripts/LustyExplorer'
@@ -34,24 +31,24 @@ Plugin 'visi-pivi-sivi/leerkan-vim-colors'
 Plugin 'mhinz/vim-janah'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-call vundle#end()    
+Plugin 'mileszs/ack.vim'
+call vundle#end()
 filetype plugin indent on
 
 "lightline setup
 set laststatus=2
 
 "command-t setup go to the plugin dir and invoke: "rake make"
+"or ruby extconf.rb -> make
 map <C-p> :CommandT<CR>
 "setup directory ignores
 "setup files excludes
 
 "vim-javacomplete2 setup
 
-"argwrap setup
-
 "buffergator setup
 map <F6> :BuffergatorToggle<CR>
-"ctrlsf setup
+let g:buffergator_hsplit_size = 10
 
 "buftabline setup
 
@@ -75,8 +72,14 @@ nmap <C-t> :YcmCompleter GetType<CR>
 nnoremap <F3>  :NERDTreeToggle<CR>
 nnoremap <C-\> :NERDTreeFocus<CR>
 let NERDTreeWinSize = 40
+let NERDTreeShowBookmarks = 1
 let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeMapOpenSplit = '<C-h>'
+
+"test only
+"nnoremap <F7> :NERDTreeToggle <bar> :NERDTreeFocus <bar> :sp <bar> :BuffergatorToggle<CR>
+"nnoremap <F8> :NERDTreeClose <bar> :BuffergatorClose <CR>
+
 "nerdtree commenter
 
 "Gundo setup
@@ -85,24 +88,44 @@ nnoremap <F4> :GundoToggle<CR>
 "Taglist setup
 nnoremap <F5> :TlistToggle<CR>
 let Tlist_Use_Right_Window   = 1
+let Tlist_WinWidth = 40
+let Tlist_Show_One_File = 1
 
 "Silver Searcher
 "pacman -S the_silver_searcher
-if executable('ag')
-	set grepprg=ag\ --nogroup\ --nocolor
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	let g:ctrlp_use_caching = 0
-endif
-nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"if executable('ag')
+"	set grepprg=ag
+"	let g:ctrlp_user_command = 'ag %s -l -g -cc""'
+"	let g:ctrlp_use_caching = 0
+"endif
+"nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-"Put some TODO's here: 
-"1. Add a shortcut to switch focus directyl to the nerdtree 
+"Custom keymap
+nnoremap <F7> :bprevious<CR>
+nnoremap <F8> :bnext<CR>
+nnoremap <C-S-Right> :vertical resize +5<CR>
+nnoremap <C-S-Left> :vertical resize -5<CR>
+
+"Reload vim after .vimrc modification
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
+
+"Remove all trailing whitespaces on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+let g:ackprg='ag --nogroup --nocolor --column'
+nnoremap F :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+"Put some TODO's here:
+"1. Add a shortcut to switch focus directyl to the nerdtree
 "2. Add a shortcut to switch focus to the main code window
 "3. If the nerdtree is opened buffgator should split vertically nerdtree
 "window and opens at the top of it.
 "4. If the buffgator is opened nerdtree should split vertically buffgator
 "window and opend at the bottom of it.
-"5. Setup java completion because it is not working properly yet!
+
 
 "color scheme settings
 colors luna
