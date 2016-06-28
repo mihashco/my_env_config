@@ -14,6 +14,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-scripts/lightline'
 Plugin 'vim-scripts/Command-T'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/vim-javacomplete2'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/buftabline'
