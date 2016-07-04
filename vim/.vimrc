@@ -83,6 +83,8 @@ let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeMapOpenSplit = '<C-h>'
 
 let NERDTreeIgnore = ['\.pyc$']
+set autochdir
+let NERDTreeChDirMode=2
 
 "test only
 "nnoremap <F7> :NERDTreeToggle <bar> :NERDTreeFocus <bar> :sp <bar> :BuffergatorToggle<CR>
