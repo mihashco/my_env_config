@@ -81,6 +81,8 @@ let NERDTreeShowBookmarks = 1
 let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeMapOpenSplit = '<C-h>'
 
+let NERDTreeIgnore = ['\.pyc$']
+
 "test only
 "nnoremap <F7> :NERDTreeToggle <bar> :NERDTreeFocus <bar> :sp <bar> :BuffergatorToggle<CR>
 "nnoremap <F8> :NERDTreeClose <bar> :BuffergatorClose <CR>
