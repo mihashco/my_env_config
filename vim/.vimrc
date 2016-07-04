@@ -12,6 +12,9 @@ set shiftwidth=3
 set nu
 set colorcolumn=120
 
+set noswapfile
+
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
