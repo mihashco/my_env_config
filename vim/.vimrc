@@ -14,7 +14,6 @@ set colorcolumn=120
 
 set noswapfile
 
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -41,6 +40,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mileszs/ack.vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()
 filetype plugin indent on
 
@@ -70,7 +70,11 @@ let g:multi_cursor_prev_key='<C-u>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-"ycm setup
+"vertical line indent
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '│'
+
 "Before using it you must go to the .vim/bundle/youcompleteme:
 "./install.py --clang-completer
 let g:ycm_confirm_extra_conf = 0
