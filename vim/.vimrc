@@ -1,3 +1,12 @@
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=119
+set autoindent
+set fileformat=unix
+
+set list lcs=tab:\|\.
+
 set nocompatible
 set hidden
 filetype off
@@ -6,11 +15,8 @@ set t_Co=256
 set t_ut=
 syntax on
 
-set tabstop=3
-set shiftwidth=3
-
 set nu
-set colorcolumn=120
+set colorcolumn=160
 
 set noswapfile
 
@@ -41,6 +47,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mileszs/ack.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'Yggdroot/indentLine'
+Plugin 'hari-rangarajan/CCTree'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 
@@ -49,9 +57,17 @@ set laststatus=2
 
 "command-t setup go to the plugin dir and invoke: "rake make"
 "or ruby extconf.rb -> make
-map <C-p> :CommandT<CR>
+"map <C-p> :CommandT<CR>
 "setup directory ignores
 "setup files excludes
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 "vim-javacomplete2 setup
 
@@ -59,7 +75,9 @@ map <C-p> :CommandT<CR>
 map <F6> :BuffergatorToggle<CR>
 let g:buffergator_hsplit_size = 10
 
-"buftabline setup
+"Folding
+set foldmethod=indent
+set foldlevel=99
 
 "LustyExplorer setup
 map <C-f> :LustyBufferGrep<CR>
@@ -78,8 +96,8 @@ let g:indentLine_char = '│'
 "Before using it you must go to the .vim/bundle/youcompleteme:
 "./install.py --clang-completer
 let g:ycm_confirm_extra_conf = 0
-nmap <C-g> :YcmCompleter GoTo<CR>
-nmap <C-t> :YcmCompleter GetType<CR>
+"nmap <C-g> :YcmCompleter GoTo<CR>
+"nmap <C-t> :YcmCompleter GetType<CR>
 
 "nerdtree setup
 nnoremap <F3>  :NERDTreeToggle<CR>
@@ -90,7 +108,7 @@ let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeMapOpenSplit = '<C-h>'
 
 let NERDTreeIgnore = ['\.pyc$']
-set autochdir
+"set autochdir
 let NERDTreeChDirMode=2
 
 "test only
@@ -105,17 +123,8 @@ nnoremap <F4> :GundoToggle<CR>
 "Taglist setup
 nnoremap <F5> :TlistToggle<CR>
 let Tlist_Use_Right_Window   = 1
-let Tlist_WinWidth = 40
+let Tlist_WinWidth = 45
 let Tlist_Show_One_File = 1
-
-"Silver Searcher
-"pacman -S the_silver_searcher
-"if executable('ag')
-"	set grepprg=ag
-"	let g:ctrlp_user_command = 'ag %s -l -g -cc""'
-"	let g:ctrlp_use_caching = 0
-"endif
-"nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 "Custom keymap
 nnoremap <F7> :bprevious<CR>
@@ -132,8 +141,11 @@ augroup END " }
 "Remove all trailing whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-let g:ackprg='ag --nogroup --nocolor --column'
+let g:ackprg='ag --cc'
 nnoremap F :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+set backspace=indent,eol,start
+map <A-]> :vsp<CR>:exec("tag ".expand("<cword>")) "
 
 "Put some TODO's here:
 "1. Add a shortcut to switch focus directyl to the nerdtree
@@ -146,3 +158,4 @@ nnoremap F :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 "color scheme settings
 colors luna
+hi SpecialKey ctermfg=66 guifg=#649A9A
