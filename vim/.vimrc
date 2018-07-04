@@ -19,6 +19,7 @@ set nu
 set colorcolumn=160
 
 set noswapfile
+set clipboard=unnamedplus
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -49,27 +50,30 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'Yggdroot/indentLine'
 Plugin 'hari-rangarajan/CCTree'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'LucHermitte/local_vimrc'
+Plugin 'dkprice/vim-easygrep'
 call vundle#end()
 filetype plugin indent on
 
 "lightline setup
 set laststatus=2
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "command-t setup go to the plugin dir and invoke: "rake make"
 "or ruby extconf.rb -> make
 "map <C-p> :CommandT<CR>
 "setup directory ignores
 "setup files excludes
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.out
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(exe|so|dll|out)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-"vim-javacomplete2 setup
+let g:ctrlp_extensions=['tag', 'buffertag', 'dir']
 
 "buffergator setup
 map <F6> :BuffergatorToggle<CR>
@@ -111,10 +115,6 @@ let NERDTreeIgnore = ['\.pyc$']
 "set autochdir
 let NERDTreeChDirMode=2
 
-"test only
-"nnoremap <F7> :NERDTreeToggle <bar> :NERDTreeFocus <bar> :sp <bar> :BuffergatorToggle<CR>
-"nnoremap <F8> :NERDTreeClose <bar> :BuffergatorClose <CR>
-
 "nerdtree commenter
 
 "Gundo setup
@@ -141,21 +141,18 @@ augroup END " }
 "Remove all trailing whitespaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-let g:ackprg='ag --cc'
-nnoremap F :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
+"let g:ackprg='ag --cc'
+"nnoremap F :Ack "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+set grepprg=ag\ --nogroup\ --nocolor
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_catching = 0
+nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 set backspace=indent,eol,start
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>")) "
 
-"Put some TODO's here:
-"1. Add a shortcut to switch focus directyl to the nerdtree
-"2. Add a shortcut to switch focus to the main code window
-"3. If the nerdtree is opened buffgator should split vertically nerdtree
-"window and opens at the top of it.
-"4. If the buffgator is opened nerdtree should split vertically buffgator
-"window and opend at the bottom of it.
-
-
 "color scheme settings
-colors luna
+colors gruvbox
+set background=dark
 hi SpecialKey ctermfg=66 guifg=#649A9A
