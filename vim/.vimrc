@@ -30,10 +30,12 @@ Plugin 'scrooloose/syntastic'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/buftabline'
 Plugin 'vim-scripts/LustyExplorer'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'sjl/gundo.vim'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'notpratheek/vim-luna'
 Plugin 'acoustichero/simple_dark'
@@ -49,7 +51,14 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'LucHermitte/lh-vim-lib'
 Plugin 'LucHermitte/local_vimrc'
 Plugin 'dkprice/vim-easygrep'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/Conque-GDB'
 call vundle#end()
+
+"Autocompletion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
 filetype plugin indent on
 
 "lightline setup
@@ -82,12 +91,6 @@ set foldlevel=99
 "LustyExplorer setup
 map <C-f> :LustyBufferGrep<CR>
 
-"vim multiple cursors setup
-let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_prev_key='<C-u>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-
 "vertical line indent
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#09AA08'
@@ -106,15 +109,8 @@ let NERDTreeWinSize = 40
 let NERDTreeShowBookmarks = 1
 let g:NERDTreeMapOpenVSplit = '<C-v>'
 let g:NERDTreeMapOpenSplit = '<C-h>'
-
 let NERDTreeIgnore = ['\.pyc$']
-"set autochdir
 let NERDTreeChDirMode=2
-
-"nerdtree commenter
-
-"Gundo setup
-nnoremap <F4> :GundoToggle<CR>
 
 "Taglist setup
 nnoremap <F5> :TlistToggle<CR>
@@ -147,6 +143,16 @@ nnoremap F :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 set backspace=indent,eol,start
 map <A-]> :vsp<CR>:exec("tag ".expand("<cword>")) "
+
+"ConqueTerm settings
+nnoremap <F2> :ConqueTerm bash<CR>
+
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+" Close omnicomplete preview automatically
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 "color scheme settings
 colors gruvbox
