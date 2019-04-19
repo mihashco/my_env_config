@@ -29,7 +29,6 @@ Plugin 'vim-scripts/Command-T'
 Plugin 'scrooloose/syntastic'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'vim-scripts/buftabline'
-Plugin 'vim-scripts/LustyExplorer'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
@@ -53,6 +52,7 @@ Plugin 'LucHermitte/local_vimrc'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 
 "Autocompletion
