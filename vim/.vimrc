@@ -16,6 +16,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/lightline'
 Plug 'easymotion/vim-easymotion'
 Plug 'ap/vim-buftabline'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 " TextEdit might fail if hidden is not set.
@@ -209,3 +210,15 @@ set exrc
 "================================= FOLD OPTIONS ======================================
 set foldmethod=syntax
 set foldlevel=99
+
+"================================ REMOVE WHITESPACES ON SAVE ========================
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+"================================ Switch off swap files =============================
+set noswapfile
+
+"======================= TAG BAR ====================================================
+nmap <F8> :TagbarToggle<CR>
+
+"============================ Snippets ==============================================
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets"]
